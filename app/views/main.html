@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+
+      <link rel="stylesheet" type="text/css" href="../css/main.css">
+      <link rel="stylesheet" type="text/css" href="../css/H2H.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="../bower_components/angular-route/angular-route.js"></script>
+      <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
+      <script src="../dependencies/angular-chart.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/> 
+      <script src="../app.js"></script>
+      <script src="../services/AppService.js"></script>
+      <script src="../services/getInfo.js"></script>
+      <script src="../controllers/MainController.js"></script>
+      <script src="../controllers/BoxController.js"></script>
+      <script src="../controllers/homeController.js"></script>
+      <script src="../controllers/awayController.js"></script>
+      <script src="../directives/dir.js"></script>
+      <script src="../directives/stats1.js"></script>
+      
+      
+  </head>
+
+  <body ng-app="App">
+      
+      <div id="box" ng-controller="BoxController">
+          <div ng-repeat="(team, id) in teams">
+            <div class = "box_menu">
+                <button id= {{team}} class="Boxfixtures" ng-click=changeLeague(id,team)> {{team}}</button>
+            </div>
+          </div>
+
+      </div>    
+      
+      <div class="main" ng-controller="MainController">
+      <h2 id= "liga">{{liga[0]}}</h2>
+          <ng-view id="MainDiv" class="main"></ng-view>
+          
+      </div>
+
+  </body>
+</html>
