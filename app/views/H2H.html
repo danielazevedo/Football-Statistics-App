@@ -1,0 +1,49 @@
+
+<div id="team1">
+	<h2>{{team1}}</h2>
+	<div ng-app="app" ng-controller="homeController">
+    	  <button class="btnH2H_home" ng-click="setActiveTab(1);">Total</button>
+    	  <button class="btnH2H_home" ng-click="setActiveTab(2);">Home</button>
+    	  <button class="btnH2H_home" ng-click="setActiveTab(3);">Away</button>
+  	  <stats-directive ></stats-directive>
+  	</div>
+
+</div>
+<div id="team2">
+	<h2 style="color: white">{{team2}}</h2>
+	<div ng-app="app" ng-controller="awayController">
+  	  <button class="btnH2H_away" ng-click="setActiveTab(1);">Total</button>
+  	  <button class="btnH2H_away" ng-click="setActiveTab(2);">Home</button>
+  	  <button class="btnH2H_away" ng-click="setActiveTab(3);">Away</button>
+  	  <sats-directive ></sats-directive>
+  	</div>
+ </div> 
+<div id="bottomDiv">
+	<h2 style="color:white;">Previous Matches</h1>
+	<table>
+	<thead>
+        <th>&nbsp;Date&nbsp;</th>
+        <th>&nbsp;Home Team&nbsp;</th>
+        <th>&nbsp;Result&nbsp;</th>
+        <th>&nbsp;Away Team&nbsp;</th>
+    </thead>
+	<tr ng-repeat="game in PrevGames" ng-style="{'background-color': resultColors[$index]}">
+		<td>{{game['date']}}</td>
+		<td>{{game['homeTeamName']}}</td>
+	   	<td>{{game['result']['goalsHomeTeam']}}-{{game['result']['goalsAwayTeam']}}</td>    
+	   	<td>{{game['awayTeamName']}}</td>
+    </tr>
+    </table>
+    <table style="margin-bottom: 10vh;">
+	<thead>
+        <th>&nbsp;{{team1}}&nbsp;</th>
+        <th>&nbsp;{{team2}}&nbsp;</th>
+        <th>&nbsp;Draw&nbsp;</th>
+    </thead>
+	<tr>
+		<td style="background-color: #00FF00;"></td>
+		<td style="background-color: #FF0000;"></td>
+		<td style="background-color: #AFEEEE;"></td>
+    </tr>
+    </table>
+</div> 

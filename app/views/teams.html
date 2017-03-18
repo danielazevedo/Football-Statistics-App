@@ -1,0 +1,32 @@
+
+
+<div style="margin-top: 10vh;position: absolute;z-index: 1;">
+	<div id= "mainDiv" ng-repeat="team in data">
+		<div class="fixtures" >
+			<div id="homeDiv">
+				<img class="homeLogo" src={{team[4]}} height="60" width="60">
+				<p>{{team[0]}}</p>
+			</div>
+			<b style="display:inline;margin-top:4vh;"> VS </b>
+			<div id="awayDiv">
+				<img class="awayLogo" src={{team[5]}} height="60" width="60">
+				<p>{{team[1]}}</p>
+			</div>
+			<p>{{team[2]}}</p>
+			<button id="btn_stats" ng-click=change(team[0],team[1])>Check statistics</button>	
+		</div>
+
+	</div>
+</div>
+<table id="tabela">
+	<thead>
+        <th style="background-color: #5DADE2;">&nbsp;Position&nbsp;</th>
+        <th style="width: 3vw;text-align: center;background-color: #85C1E9;">&nbsp;Team Name&nbsp;</th>
+        <th style="background-color: #5DADE2;">&nbsp;Points&nbsp;</th>        
+    </thead>
+	<tr ng-repeat="place in tabelaTeams">
+		<td style="background-color: #5DADE2;">{{$index+1}}</td>
+		<td style="background-color: #85C1E9;">{{place}}</td>
+	   	<td style="background-color: #5DADE2;">{{tabelaPoints[$index]}}</td>
+	    </tr>
+</table>	

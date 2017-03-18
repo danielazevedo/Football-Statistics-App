@@ -1,0 +1,81 @@
+<div>
+	<table id="FirstTable" style="visibility:hidden">
+			    <thead>
+			        <th></th>
+			        <th>&nbsp;Total&nbsp;</th>
+			        <th>&nbsp;Victories&nbsp;</th>
+			        <th>&nbsp;Draws&nbsp;</th>
+			        <th>&nbsp;Defeats&nbsp;</th>
+			        <th style="border-left: 3px solid black;">&nbsp;Points&nbsp;</th>
+			    </thead>
+			    <tr>
+			        <th>&nbsp;Games&nbsp;</th>
+			        <td>{{totalGames}}</td>
+			        <td>{{vitorias}}</td>
+			        <td>{{empates}}</td>
+			        <td>{{derrotas}}</td>
+			        <td style="border-left: 3px solid black;">{{points}}</td>
+			    </tr>
+			</table>
+
+			<table id="SecondTable" style="visibility:hidden">
+			    <thead>
+			        <th></th>
+			        <th>&nbsp;Diff Goals&nbsp;</th>
+			        <th>&nbsp;Goals scored&nbsp;</th>
+			        <th>&nbsp;Goals conceded&nbsp;</th>
+			    </thead>
+			    <tr>
+			        <th>&nbsp;Goals&nbsp;</th>
+			        <td>{{diff}}</td>
+			        <td>{{golosM}}</td>
+			        <td>{{golosS}}</td>
+			    </tr>
+			</table>
+
+			<h1 id="Warning" style="text-align:center;color: white">Choose an option above</h1>    
+
+			<div style="height:9vh;width:22vw;float: left;margin-top: 5vh;">
+				<canvas id="pie" class="chart chart-pie"
+				  chart-data="datas" chart-labels="labels" chart-options="options" chart-colors="colors">
+				</canvas>           
+
+
+	      </div>
+
+	      <div style="height:9vh;width:22vw;float: right;margin-top: 5vh;">
+				<canvas id="pie" class="chart chart-pie"
+				  chart-data="datas1" chart-labels="labels" chart-options="options1" chart-colors="colors">
+				</canvas>           
+	      </div>
+
+	      <div id="LastG" style="height:18vh;width:22vw;float:left;margin-top:37vh;color:white;">
+				<p id="P1" style="visibility:hidden;text-align: center;font-size: 110%;font-weight: bold;">Last Games</p>
+				<div ng-repeat="game in lastGames">
+	            	<p style="text-align: center;font-size: 90%;">{{game}}</p>
+	          </div>
+	      </div>
+
+	      <div style="height:18vh;width:22vw;float: right;margin-top: 37vh;">
+				<p id="P2" style="visibility:hidden;text-align: center;font-size: 110%;font-weight: bold;color:white;">Next Games</p>
+				<div ng-repeat="game in nextGames">
+	            	<p style="text-align: center;font-size: 90%;color:white;">{{game}}</p>
+	          </div>
+	      </div>
+
+			
+	      <table id="SerieT" style="visibility:hidden">
+			    <thead>
+			        <th id="serieCol"></th>
+			        <th id="serieCol">&nbsp;Victory&nbsp;</th>
+			        <th id="serieCol">&nbsp;Draw&nbsp;</th>
+			        <th id="serieCol">&nbsp;Defeat&nbsp;</th>
+			    </thead>
+			    <tr>
+			        <th id="serieCol">&nbsp;Serie&nbsp;</th>
+			        <td id="serieCol">{{serieV}}</td>
+			        <td id="serieCol">{{serieE}}</td>
+			        <td id="serieCol">{{serieD}}</td>
+			    </tr>
+		</table>
+</div>
