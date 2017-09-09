@@ -5,9 +5,9 @@ require 'net/http'
 require 'open-uri'
 require 'json'
 require 'date'
-$API_KEY = 'YOUR football-data API KEY'
+$API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 	
-	def make_request(path='')		
+	def make_request(path)		
 		data = params['team']
 		response = nil
 		error = {"error"=>"You reached your request limit. Wait 50 seconds."}
@@ -19,9 +19,6 @@ $API_KEY = 'YOUR football-data API KEY'
 			c= connection.get
 			response = JSON.parse(c.body)
 			
-		#puts "resposta"
-		#puts response.nil?
-		#puts response
 		return response
 
 	end
@@ -33,7 +30,7 @@ $API_KEY = 'YOUR football-data API KEY'
 		puts response.length
 		response.each do |i|
 
-			teams =  make_request('competitions/'<<i['id'].to_s<<'/teams')
+			teams =  make_request('competitions/' << i['id'].to_s << '/teams')
 			teams_1 = teams['teams']			
 			puts teams_1
 			teams_1.each do |j|
@@ -68,7 +65,7 @@ $API_KEY = 'YOUR football-data API KEY'
 		
 		aux = getGoalsAway(response)
 		goals = getGoalsHome(response)
-
+	       	
 		i = 0
 		goals.each do |x,y|
 			#puts goals[x], aux[x]
@@ -601,8 +598,6 @@ $API_KEY = 'YOUR football-data API KEY'
 		else
 			my_hash = getGames(league)
 		end
-		#puts my_hash[1][1]
-		#my_hash = [['Primeira Liga Portuguesa'],['FC Porto', 'Sporting CP'],['Benfica','Nacional'],['Chaves','Boavista']]
 		table = getLeagueTable(league)
 		my_hash.insert(0,table)
 		

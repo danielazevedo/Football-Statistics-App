@@ -1,7 +1,7 @@
 app.service('sharedProperties', function () {
         var p1 = '';
         var p2 = '';
-        var leagueName = 439
+        var leagueName = 437
         return {
             getHomeTeam: function () {
                 return p1;

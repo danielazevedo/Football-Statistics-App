@@ -1,7 +1,7 @@
 //acede ao return do getInfo
 app.controller('BoxController', ['$scope', '$rootScope', '$location', 'sharedProperties', function($scope, $rootScope, $location, sharedProperties ) {
-  $scope.teams = {'Primeira Liga Portuguesa': 439, 'Premier League 2016/17': 426, 'Ligue 1 2016/17': 434, '1. Bundesliga 2016/17': 430, 'Primera Division 2016/17':436, 'Serie A 2016/17': 438}
-  $scope.current_team = 'Primeira Liga Portuguesa'
+  $scope.teams = {'Primeira Liga 2017/18': 457, 'Premier League 2017/18': 445, 'Ligue 1 2017/18': 450, '1. Bundesliga 2017/18': 452, 'Primera Division 2017/18':455, 'Serie A 2017/18': 456}
+  $scope.current_team = 'Primeira Liga 2017/18'
 
 
   $scope.method = function() {
@@ -15,7 +15,6 @@ app.controller('BoxController', ['$scope', '$rootScope', '$location', 'sharedPro
         }
 
   $scope.changeLeague = function(league, leagueName) {
-      console.log("agora")
        
        document.getElementById("MainDiv").style.opacity = "0.5";
        document.getElementById("liga").innerHTML = "LOADING...";
@@ -30,8 +29,5 @@ app.controller('BoxController', ['$scope', '$rootScope', '$location', 'sharedPro
         
     };
   
-  
-    //$scope.changeButtonColor('Primeira Liga Portuguesa',"#0000FF");
-
 
 }]);
