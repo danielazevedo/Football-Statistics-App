@@ -6,7 +6,8 @@ require 'open-uri'
 require 'json'
 require 'date'
 $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
-	
+$teams_ids = Hash.new
+
 	def make_request(path)		
 		data = params['team']
 		response = nil
@@ -23,6 +24,11 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 	end
 
 	def getTeamId(team)
+		puts team
+		if($teams_ids.keys.include? team)
+			puts "Team found in hash"
+			return $teams_ids[team]
+		end
 		response = make_request('competitions')
 		response.each do |i|
 
@@ -33,6 +39,7 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 					aux = j['_links']["self"]["href"]
 					id = aux[aux.index('/teams/')+7..-1]
 					id = id.to_i
+					$teams_ids[team] = id
 					return id
 				end
 
