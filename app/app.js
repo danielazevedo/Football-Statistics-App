@@ -9,7 +9,6 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when('/Head2Head', {
       controller: "homeController", 
-      t: "DEU!!",
       templateUrl: 'H2H.html' 
     });
 });

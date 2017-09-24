@@ -11,7 +11,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 		data = params['team']
 		response = nil
 		error = {"error"=>"You reached your request limit. Wait 50 seconds."}
-  		#puts "Data received from HTML: #{data}"
 		uri = URI.parse('http://api.football-data.org/v1/'+path)
 		
 			connection ||= Faraday.new(url: uri, headers: {"X-Auth-Token" => $API_KEY, "X-Response-Control" => 'full'},request: {
@@ -25,14 +24,10 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 
 	def getTeamId(team)
 		response = make_request('competitions')
-		puts "getid"
-		puts response
-		puts response.length
 		response.each do |i|
 
 			teams =  make_request('competitions/' << i['id'].to_s << '/teams')
 			teams_1 = teams['teams']			
-			puts teams_1
 			teams_1.each do |j|
 				if (j['name'] == team || j['shortname'] == team)
 					aux = j['_links']["self"]["href"]
@@ -57,7 +52,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 			return {"error"=> "Team not found"}.to_json
 		else
 			puts "Team Id: #{id}"
-			puts "TotalInfo"
 		end
 
 		response = make_request('teams/'+id.to_s+'/fixtures')
@@ -68,7 +62,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 	       	
 		i = 0
 		goals.each do |x,y|
-			#puts goals[x], aux[x]
 	   		goals[x] += aux[x]
 		   	i +=1
 		end
@@ -180,7 +173,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 					jogosGolos += 1
 					golosMarcados_antesInt += i['result']['halfTime']['goalsHomeTeam'].to_i
 					golosSofridos_antesInt += i['result']['halfTime']['goalsAwayTeam'].to_i
-					#puts i['homeTeamName'], i['awayTeamName'], i['result']['halfTime']
 				end
 				
 				golosMarcados += i['result']['goalsHomeTeam'].to_i
@@ -280,10 +272,13 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 		#data = DateTime.parse("2016-08-12T19:30:00Z").to_date
 		jogos = []
 		response = response['fixtures']
-		j = response.length-1
+		if(response.length == 0)
+			j = 0
+		else
+			j = response.length-1
+		end
 		i = 0
-		until i == 5 do
-			
+		until i == 5 || j < 0 do
 			if(response[j]['status'] == 'FINISHED')
 
 				case restriction
@@ -315,7 +310,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 		response = response['fixtures']
 		j = 0
 		i = 0
-		#puts response
 		until i == 5 || j >= response.length do
 			if(response[j]['status'] == 'TIMED' || response[j]['status'] == 'SCHEDULED')
 				
@@ -324,7 +318,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 						if(response[j]['homeTeamName'] == team)
 							i += 1
 							jogos.push(response[j])
-							#puts response[j]['homeTeamName'], response[j]['awayTeamName']
 						end
 
 					when 'AWAY'
@@ -350,7 +343,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 		res = nil
 		loop do
 			if(response[j]['status'] == 'FINISHED' && restriction == 'HOME' && response[j]['homeTeamName'] == team)
-				puts "PRIMEIRO IF"
 				diff = response[j]['result']['goalsHomeTeam'].to_i - response[j]['result']['goalsAwayTeam'].to_i
 
 				if diff > 0
@@ -447,7 +439,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 		res = nil
 		loop do
 			if(response[j]['status'] == 'FINISHED')
-				#puts DateTime.parse(response[j]['date']).to_datefa
 				if(response[j]['homeTeamName'] == team)
 					diff = response[j]['result']['goalsHomeTeam'] - response[j]['result']['goalsAwayTeam']
 					
@@ -528,7 +519,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 
 		
 		response = make_request('competitions/'+league.to_s+'/fixtures?timeFrame=n'+nDays.to_s)
-		#puts response
 		response = response['fixtures']
 
 		logosResponse = make_request('competitions/'+league.to_s+'/teams')
@@ -563,7 +553,6 @@ $API_KEY = '5e79a1bf10b04819898c84fb4f46ce66'
 			
 			logo1 = logos[x['homeTeamName']]
 			logo2 = logos[x['awayTeamName']]
-			#puts aux['crestUrl']
 			x['date'] = DateTime.parse(x['date']).to_s
 			x['date'].sub! 'T', '  '
 			x['date'].sub! ':00+00:00', ''
